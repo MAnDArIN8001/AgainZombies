@@ -7,7 +7,7 @@ using Zenject;
 public class PlayerJumper : MonoBehaviour
 {
     public event Action OnJumped;
-    public event Action OnGrounded;
+    public event Action<bool> OnGroundedStateChanged;
 
     private bool _isOnGround;
 
@@ -50,7 +50,7 @@ public class PlayerJumper : MonoBehaviour
         {
             _isOnGround = true;
 
-            OnGrounded?.Invoke();
+            OnGroundedStateChanged?.Invoke(_isOnGround);
         }
     }
 
@@ -78,5 +78,7 @@ public class PlayerJumper : MonoBehaviour
         _rigidbody.velocity = newVelocity;
 
         _isOnGround = false;
+
+        OnGroundedStateChanged?.Invoke(_isOnGround);
     }
 }
