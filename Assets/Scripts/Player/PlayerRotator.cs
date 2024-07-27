@@ -10,7 +10,7 @@ public class PlayerRotator : MonoBehaviour
     [SerializeField] private float _rotationSmoothTime;
 
     private Vector3 _currentRotationVelocity;
-    private Vector2 _lastMouseDelta;
+    private Vector3 _lastSmoothRotation;
 
     private MainInput _input;
 
@@ -34,9 +34,7 @@ public class PlayerRotator : MonoBehaviour
     {
         Vector2 mouseDelta = ReadMouseDeltaPosition();
 
-        OnRotatingInputValuesCompute?.Invoke(mouseDelta);
-
-        mouseDelta = mouseDelta.normalized * _sensitivity;
+        mouseDelta *= _sensitivity;
 
         Vector3 targetRotation = new Vector3(0, mouseDelta.x, 0);
 
@@ -47,6 +45,15 @@ public class PlayerRotator : MonoBehaviour
             ref _currentRotationVelocity,
             _rotationSmoothTime
         );
+
+        if (smoothRotation != _lastSmoothRotation)
+        {
+            Vector3 rotationDirection = smoothRotation - _lastSmoothRotation;
+
+            OnRotatingInputValuesCompute?.Invoke(rotationDirection);
+        }
+
+        _lastSmoothRotation = smoothRotation;
 
         transform.eulerAngles = smoothRotation;
     }

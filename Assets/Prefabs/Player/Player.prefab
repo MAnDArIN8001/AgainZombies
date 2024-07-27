@@ -122,7 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15fb8bcc06a2f245a33e69d241058c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSoftZone: 3
+  _rotationSoftZone: 0.5
+  _runingStateValue: 2
 --- !u!114 &319251366494871201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _forwardMovingSpeed: 3
+  _forwardRuningSpeed: 6
   _backwardMovingSpeed: 2
+  _backwardRuningSpeed: 4
 --- !u!114 &1121909403625933869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333a0d7baba25894d8d3e016d3aecaa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sensitivity: 90
+  _sensitivity: 8
   _rotationSmoothTime: 1
 --- !u!1001 &7933963450062604074
 PrefabInstance:
