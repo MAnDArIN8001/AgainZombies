@@ -87,14 +87,16 @@ public class PlayerView : MonoBehaviour
 
     private void HandleMovement(Vector2 movementValue)
     {
-        float computedMovementValue = movementValue.normalized.y;
+        float computedVerticalMovementValue = movementValue.normalized.y;
+        float computedHorizontalMovementValue = movementValue.normalized.x;
 
         if (_isRunning)
         {
-            computedMovementValue *= _runingStateValue;
+            computedVerticalMovementValue *= _runingStateValue;
         }
 
-        _animator.SetFloat(PlayerAnimationsConsts.MovementValueKey, computedMovementValue);
+        _animator.SetFloat(PlayerAnimationsConsts.VerticalMovementValueKey, computedVerticalMovementValue);
+        _animator.SetFloat(PlayerAnimationsConsts.HorizontalMovementValueKey, computedHorizontalMovementValue);
     }
 
     private void HandleRotating(Vector2 rotatingValue)

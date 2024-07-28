@@ -11,6 +11,7 @@ public class PlayerMover : MonoBehaviour
 
     private bool _isRunning;
 
+    [SerializeField] private float _strafeMovingSpeed;
     [SerializeField] private float _forwardMovingSpeed;
     [SerializeField] private float _forwardRuningSpeed;
     [SerializeField] private float _backwardMovingSpeed;
@@ -75,7 +76,7 @@ public class PlayerMover : MonoBehaviour
     {
         float speed = ComputeSpeed(inputValue);
 
-        Vector3 moveDirection = transform.forward * inputValue.y * speed + transform.right * inputValue.x * speed;
+        Vector3 moveDirection = transform.forward * inputValue.y * speed + transform.right * inputValue.x * _strafeMovingSpeed;
         moveDirection.y = _rigidbody.velocity.y;
 
         _rigidbody.velocity = moveDirection;
