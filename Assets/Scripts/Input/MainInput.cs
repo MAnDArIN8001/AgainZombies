@@ -162,6 +162,142 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Inventory"",
+            ""id"": ""adb72289-12d1-4a73-b7ab-221d0a0579ab"",
+            ""actions"": [
+                {
+                    ""name"": ""LightWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""e4a3468c-43d3-4638-a9cb-e686f9ad5179"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CommonWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ed66c31-45a4-4c8b-9a23-bee90e05fb51"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavyWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""76e283d9-1d8f-449e-815d-aa8af68cb60e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grenade"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf4b3b04-a994-4c4a-9b2c-1bfb2efcf35c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""925c6480-c248-471a-a720-c526b5b5dd91"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LightWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a86b0d4-4981-4277-8ca6-6de0a1ca2634"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CommonWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5aaa76d1-09d4-443e-a6bb-cb9ce830b1f0"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeavyWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e390a6cb-5323-41b7-b537-21e7da7ffcbd"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grenade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gun"",
+            ""id"": ""7b337e6d-71a9-4d01-b1f6-6793ebb90bf0"",
+            ""actions"": [
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""fcd69d00-f44a-4d54-b4ba-f5673ba37150"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""39c465e4-ceec-408e-a565-0ae93e8e4c67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2d5c6fc8-8928-43b2-a8fd-df772daab0bd"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a9f35d3-a8de-45f5-bda3-bb4a2c02e2ee"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -174,6 +310,16 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
         // Mouse
         m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
         m_Mouse_Delta = m_Mouse.FindAction("Delta", throwIfNotFound: true);
+        // Inventory
+        m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
+        m_Inventory_LightWeapon = m_Inventory.FindAction("LightWeapon", throwIfNotFound: true);
+        m_Inventory_CommonWeapon = m_Inventory.FindAction("CommonWeapon", throwIfNotFound: true);
+        m_Inventory_HeavyWeapon = m_Inventory.FindAction("HeavyWeapon", throwIfNotFound: true);
+        m_Inventory_Grenade = m_Inventory.FindAction("Grenade", throwIfNotFound: true);
+        // Gun
+        m_Gun = asset.FindActionMap("Gun", throwIfNotFound: true);
+        m_Gun_Shoot = m_Gun.FindAction("Shoot", throwIfNotFound: true);
+        m_Gun_Reload = m_Gun.FindAction("Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -339,6 +485,130 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
         }
     }
     public MouseActions @Mouse => new MouseActions(this);
+
+    // Inventory
+    private readonly InputActionMap m_Inventory;
+    private List<IInventoryActions> m_InventoryActionsCallbackInterfaces = new List<IInventoryActions>();
+    private readonly InputAction m_Inventory_LightWeapon;
+    private readonly InputAction m_Inventory_CommonWeapon;
+    private readonly InputAction m_Inventory_HeavyWeapon;
+    private readonly InputAction m_Inventory_Grenade;
+    public struct InventoryActions
+    {
+        private @MainInput m_Wrapper;
+        public InventoryActions(@MainInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LightWeapon => m_Wrapper.m_Inventory_LightWeapon;
+        public InputAction @CommonWeapon => m_Wrapper.m_Inventory_CommonWeapon;
+        public InputAction @HeavyWeapon => m_Wrapper.m_Inventory_HeavyWeapon;
+        public InputAction @Grenade => m_Wrapper.m_Inventory_Grenade;
+        public InputActionMap Get() { return m_Wrapper.m_Inventory; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InventoryActions set) { return set.Get(); }
+        public void AddCallbacks(IInventoryActions instance)
+        {
+            if (instance == null || m_Wrapper.m_InventoryActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_InventoryActionsCallbackInterfaces.Add(instance);
+            @LightWeapon.started += instance.OnLightWeapon;
+            @LightWeapon.performed += instance.OnLightWeapon;
+            @LightWeapon.canceled += instance.OnLightWeapon;
+            @CommonWeapon.started += instance.OnCommonWeapon;
+            @CommonWeapon.performed += instance.OnCommonWeapon;
+            @CommonWeapon.canceled += instance.OnCommonWeapon;
+            @HeavyWeapon.started += instance.OnHeavyWeapon;
+            @HeavyWeapon.performed += instance.OnHeavyWeapon;
+            @HeavyWeapon.canceled += instance.OnHeavyWeapon;
+            @Grenade.started += instance.OnGrenade;
+            @Grenade.performed += instance.OnGrenade;
+            @Grenade.canceled += instance.OnGrenade;
+        }
+
+        private void UnregisterCallbacks(IInventoryActions instance)
+        {
+            @LightWeapon.started -= instance.OnLightWeapon;
+            @LightWeapon.performed -= instance.OnLightWeapon;
+            @LightWeapon.canceled -= instance.OnLightWeapon;
+            @CommonWeapon.started -= instance.OnCommonWeapon;
+            @CommonWeapon.performed -= instance.OnCommonWeapon;
+            @CommonWeapon.canceled -= instance.OnCommonWeapon;
+            @HeavyWeapon.started -= instance.OnHeavyWeapon;
+            @HeavyWeapon.performed -= instance.OnHeavyWeapon;
+            @HeavyWeapon.canceled -= instance.OnHeavyWeapon;
+            @Grenade.started -= instance.OnGrenade;
+            @Grenade.performed -= instance.OnGrenade;
+            @Grenade.canceled -= instance.OnGrenade;
+        }
+
+        public void RemoveCallbacks(IInventoryActions instance)
+        {
+            if (m_Wrapper.m_InventoryActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IInventoryActions instance)
+        {
+            foreach (var item in m_Wrapper.m_InventoryActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_InventoryActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public InventoryActions @Inventory => new InventoryActions(this);
+
+    // Gun
+    private readonly InputActionMap m_Gun;
+    private List<IGunActions> m_GunActionsCallbackInterfaces = new List<IGunActions>();
+    private readonly InputAction m_Gun_Shoot;
+    private readonly InputAction m_Gun_Reload;
+    public struct GunActions
+    {
+        private @MainInput m_Wrapper;
+        public GunActions(@MainInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Shoot => m_Wrapper.m_Gun_Shoot;
+        public InputAction @Reload => m_Wrapper.m_Gun_Reload;
+        public InputActionMap Get() { return m_Wrapper.m_Gun; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GunActions set) { return set.Get(); }
+        public void AddCallbacks(IGunActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GunActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GunActionsCallbackInterfaces.Add(instance);
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
+        }
+
+        private void UnregisterCallbacks(IGunActions instance)
+        {
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
+        }
+
+        public void RemoveCallbacks(IGunActions instance)
+        {
+            if (m_Wrapper.m_GunActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGunActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GunActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GunActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GunActions @Gun => new GunActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -348,5 +618,17 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
     public interface IMouseActions
     {
         void OnDelta(InputAction.CallbackContext context);
+    }
+    public interface IInventoryActions
+    {
+        void OnLightWeapon(InputAction.CallbackContext context);
+        void OnCommonWeapon(InputAction.CallbackContext context);
+        void OnHeavyWeapon(InputAction.CallbackContext context);
+        void OnGrenade(InputAction.CallbackContext context);
+    }
+    public interface IGunActions
+    {
+        void OnShoot(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }
