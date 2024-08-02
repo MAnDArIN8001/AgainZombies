@@ -16,6 +16,7 @@ public class Pistol : Weapon
         if (_input is not null)
         {
             _input.Gun.Shoot.performed += HandleShoot;
+            _input.Gun.Reload.performed += HandleReload;
         }
     }
 
@@ -26,6 +27,7 @@ public class Pistol : Weapon
         if (_input is not null)
         {
             _input.Gun.Shoot.performed -= HandleShoot;
+            _input.Gun.Reload.performed += HandleReload;
         }
     }
 
@@ -35,6 +37,8 @@ public class Pistol : Weapon
         {
             return;
         }
+
+        Shoot();
     }
 
     protected override void Shoot()

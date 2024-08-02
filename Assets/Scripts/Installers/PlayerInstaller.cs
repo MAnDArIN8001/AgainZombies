@@ -14,6 +14,8 @@ public class PlayerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        Container.Bind<PlayerInventoryModel>().FromResources(PlayerResourcesNames.PlayerInventoryModelPath);
+
         GameObject player = Container.InstantiatePrefab(_playerPrefab, _instancePoint.position, _instanceRotation, null);
 
         _virtualCamera.LookAt = player.transform;

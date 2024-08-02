@@ -7,9 +7,10 @@ public class PlayerInventoryController : InventoryController
     private MainInput _input;
 
     [Inject] 
-    private void Initialize(MainInput input)
+    private void Initialize(MainInput input, PlayerInventoryModel inventoryModel)
     {
         _input = input;
+        _inventoryModel = inventoryModel;
     }
 
     private void OnEnable()
@@ -63,5 +64,7 @@ public class PlayerInventoryController : InventoryController
         GameObject weapon = _inventoryModel.GetWeaponByType(weaponType);
 
         _currentWeapon = weapon;
+
+        Debug.Log($"current weapon is: {weapon}, of type: {weaponType}");
     }
 }

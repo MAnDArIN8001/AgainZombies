@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
 public abstract class InventoryModel : ScriptableObject
 {
     protected Dictionary<WeaponType, GameObject> _weapons = new Dictionary<WeaponType, GameObject>();
