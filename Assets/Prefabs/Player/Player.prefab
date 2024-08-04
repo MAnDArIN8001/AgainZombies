@@ -125,6 +125,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotationSoftZone: 0.5
   _runingStateValue: 2
+  _overrideControllersByWeaoponType:
+    _keys: 00000000010000000200000003000000
+    _values:
+    - {fileID: 22100000, guid: 25ded3b85d09aa14ca5360a075162cb7, type: 2}
+    - {fileID: 22100000, guid: 792d56bf5903a1b478c56d938f5a6aa5, type: 2}
+    - {fileID: 22100000, guid: 96ae1961824af41429dd974298cf418a, type: 2}
+    - {fileID: 22100000, guid: 25ded3b85d09aa14ca5360a075162cb7, type: 2}
 --- !u!114 &319251366494871201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1463,19 +1470,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6515712193588681746, guid: 04af573fe9fefc74a9f1e710fad4971c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9999326
+      value: 0.9836264
       objectReference: {fileID: 0}
     - target: {fileID: 6515712193588681746, guid: 04af573fe9fefc74a9f1e710fad4971c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0028311603
+      value: 0.17010969
       objectReference: {fileID: 0}
     - target: {fileID: 6515712193588681746, guid: 04af573fe9fefc74a9f1e710fad4971c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0039495816
+      value: -0.05714706
       objectReference: {fileID: 0}
     - target: {fileID: 6515712193588681746, guid: 04af573fe9fefc74a9f1e710fad4971c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.010553536
+      value: -0.016615938
       objectReference: {fileID: 0}
     - target: {fileID: 6515712193588681746, guid: 04af573fe9fefc74a9f1e710fad4971c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

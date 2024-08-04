@@ -1,8 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMover))]
-[RequireComponent(typeof(PlayerRotator))]
 public class PlayerView : MonoBehaviour
 {
     private bool _isRunning;
@@ -10,11 +7,14 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private float _rotationSoftZone;
     [SerializeField] private float _runingStateValue;
 
+    [SerializeField] private SerializableDictinary<WeaponType, AnimatorOverrideController> _overrideControllersByWeaoponType;
+
     private Animator _animator;
 
     private PlayerMover _playerMover;
     private PlayerRotator _playerRotator;
     private PlayerJumper _playerJumper;
+    private PlayerInventoryController _playerInventoryController;
 
     private void Awake()
     {
@@ -23,6 +23,7 @@ public class PlayerView : MonoBehaviour
         _playerMover = GetComponent<PlayerMover>();
         _playerRotator = GetComponent<PlayerRotator>();
         _playerJumper = GetComponent<PlayerJumper>();
+        _playerInventoryController = GetComponent<PlayerInventoryController>();
 
         if (_animator is null)
         {
@@ -42,6 +43,11 @@ public class PlayerView : MonoBehaviour
         if (_playerRotator is null)
         {
             Debug.LogError($"There's no PlayerRotator on game object: {gameObject.name}");
+        }
+
+        if (_playerInventoryController is null)
+        {
+            Debug.LogError($"Ther's no PlayerRotator on game object: {gameObject.name}");
         }
     }
 
@@ -63,6 +69,11 @@ public class PlayerView : MonoBehaviour
             _playerJumper.OnJumped += HandleJump;
             _playerJumper.OnGroundedStateChanged += HandleLanding;
         }
+
+        if (_playerInventoryController is not null)
+        {
+            _playerInventoryController.OnCurrentWeaponChanged += HandleCurrentWeaponChangings;
+        }
     }
 
     private void OnDisable()
@@ -83,6 +94,13 @@ public class PlayerView : MonoBehaviour
             _playerJumper.OnJumped -= HandleJump;
             _playerJumper.OnGroundedStateChanged -= HandleLanding;
         }
+
+        if (_playerInventoryController is not null)
+        {
+            _playerInventoryController.OnCurrentWeaponChanged -= HandleCurrentWeaponChangings;
+        }
+
+        _overrideControllersByWeaoponType.Clear();
     }
 
     private void HandleMovement(Vector2 movementValue)
@@ -124,5 +142,13 @@ public class PlayerView : MonoBehaviour
     private void HandleLanding(bool newStateValue)
     {
         _animator.SetBool(PlayerAnimationsConsts.GroundStateKey, newStateValue);
+    }
+
+    private void HandleCurrentWeaponChangings(WeaponType weaponType) 
+    {
+        AnimatorOverrideController overrideControllerForWeaponType = _overrideControllersByWeaoponType.GetValue(weaponType);
+
+        _animator.runtimeAnimatorController = overrideControllerForWeaponType;
+        _animator.TrySetLayerWeight(PlayerAnimationsConsts.HandsLayerName, 1f);
     }
 }

@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
 public class PlayerInventoryController : InventoryController
 {
+    public event Action<WeaponType> OnCurrentWeaponChanged;
+
     private MainInput _input;
 
     [Inject] 
@@ -64,6 +67,7 @@ public class PlayerInventoryController : InventoryController
         GameObject weapon = _inventoryModel.GetWeaponByType(weaponType);
 
         _currentWeapon = weapon;
+        OnCurrentWeaponChanged?.Invoke(weaponType);
 
         Debug.Log($"current weapon is: {weapon}, of type: {weaponType}");
     }
