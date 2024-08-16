@@ -2,9 +2,9 @@ using UnityEngine;
 
 public abstract class InventoryModel : ScriptableObject
 {
-    [SerializeField] protected SerializableDictinary<WeaponType, GameObject> _weapons;
+    [SerializeField] protected SerializableDictinary<WeaponType, Weapon> _weapons;
 
-    public virtual GameObject GetWeaponByType(WeaponType weaponType) 
+    public virtual Weapon GetWeaponByType(WeaponType weaponType) 
     {
         if (!_weapons.ContainsKey(weaponType))
         {

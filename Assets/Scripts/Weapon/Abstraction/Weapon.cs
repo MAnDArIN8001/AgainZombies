@@ -1,55 +1,37 @@
 using System;
-using Zenject;
 using UnityEngine;
-using Unity.VisualScripting;
-using UnityEngine.InputSystem;
 
 public abstract class Weapon : MonoBehaviour
 {
-    public abstract event Action OnMakeShhot;
-    public abstract event Action OnReload;
-    public abstract event Action OnAmmoFull;
-    public abstract event Action<int> OnLowAmmo;
-
+    public virtual event Action OnReload;
+    public virtual event Action OnAmmoFull;
+    public virtual event Action OnMakeShhot;
+    public virtual event Action<int> OnLowAmmo;
+    public virtual event Action<bool> OnAimingStateChanged;
+         
     protected bool _isReloading;
+    protected bool _isAiming;
+
+    protected int _currentAmmoCount;
 
     protected WeaponType _weaponType;
 
     [SerializeField] protected WeaponModel _weaponModel;
 
-    protected MainInput _input;
-
     public WeaponType WeaponType => _weaponType;
 
-    [Inject] 
-    private void Initialize(MainInput input)
+    public abstract void Shoot();
+
+    public abstract void Reload();
+
+    public abstract void HandleAiming(bool aimingStat);
+
+    private void OnDestroy()
     {
-        _input = input;
+        OnReload = null;
+        OnLowAmmo = null;
+        OnAmmoFull = null;
+        OnMakeShhot = null;
+        OnAimingStateChanged = null;
     }
-
-    protected virtual void OnEnable()
-    {
-        if (_input is not null)
-        {
-            _input.Enable();
-
-            _input.Gun.Reload.performed += HandleReload;
-        }
-    }
-
-    protected virtual void OnDisable()
-    {
-        if (_input is not null)
-        {
-            _input.Disable();
-
-            _input.Gun.Reload.performed += HandleReload;
-        }
-    }
-
-    protected abstract void Shoot();
-
-    protected abstract void HandleReload(InputAction.CallbackContext context);
-
-    protected abstract void Reload();
 }

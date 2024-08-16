@@ -1,6 +1,4 @@
 using System;
-using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Pistol : Weapon
 {
@@ -8,51 +6,20 @@ public class Pistol : Weapon
     public override event Action OnAmmoFull;
     public override event Action OnMakeShhot;
     public override event Action<int> OnLowAmmo;
+    public override event Action<bool> OnAimingStateChanged;
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-
-        if (_input is not null)
-        {
-            _input.Gun.Shoot.performed += HandleShoot;
-            _input.Gun.Reload.performed += HandleReload;
-        }
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-
-        if (_input is not null)
-        {
-            _input.Gun.Shoot.performed -= HandleShoot;
-            _input.Gun.Reload.performed += HandleReload;
-        }
-    }
-
-    private void HandleShoot(InputAction.CallbackContext context)
-    {
-        if (_isReloading)
-        {
-            return;
-        }
-
-        Shoot();
-    }
-
-    protected override void Shoot()
+    public override void Shoot()
     {
         
     }
 
-    protected override void Reload()
+    public override void Reload()
     {
 
     }
 
-    protected override void HandleReload(InputAction.CallbackContext context)
+    public override void HandleAiming(bool aimingStat)
     {
-
+        
     }
 }

@@ -272,6 +272,15 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""dfdcd956-b8f6-4fef-ab93-60e9946bcc45"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -294,6 +303,17 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44ef821f-9ba8-4950-be73-907408a084f9"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -320,6 +340,7 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
         m_Gun = asset.FindActionMap("Gun", throwIfNotFound: true);
         m_Gun_Shoot = m_Gun.FindAction("Shoot", throwIfNotFound: true);
         m_Gun_Reload = m_Gun.FindAction("Reload", throwIfNotFound: true);
+        m_Gun_Aim = m_Gun.FindAction("Aim", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -561,12 +582,14 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
     private List<IGunActions> m_GunActionsCallbackInterfaces = new List<IGunActions>();
     private readonly InputAction m_Gun_Shoot;
     private readonly InputAction m_Gun_Reload;
+    private readonly InputAction m_Gun_Aim;
     public struct GunActions
     {
         private @MainInput m_Wrapper;
         public GunActions(@MainInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_Gun_Shoot;
         public InputAction @Reload => m_Wrapper.m_Gun_Reload;
+        public InputAction @Aim => m_Wrapper.m_Gun_Aim;
         public InputActionMap Get() { return m_Wrapper.m_Gun; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -582,6 +605,9 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
         }
 
         private void UnregisterCallbacks(IGunActions instance)
@@ -592,6 +618,9 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
         }
 
         public void RemoveCallbacks(IGunActions instance)
@@ -630,5 +659,6 @@ public partial class @MainInput: IInputActionCollection2, IDisposable
     {
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
 }

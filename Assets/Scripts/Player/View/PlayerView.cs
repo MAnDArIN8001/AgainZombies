@@ -16,6 +16,8 @@ public class PlayerView : MonoBehaviour
     private PlayerJumper _playerJumper;
     private PlayerInventoryController _playerInventoryController;
 
+    private Weapon _currentWeapon;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -73,6 +75,7 @@ public class PlayerView : MonoBehaviour
         if (_playerInventoryController is not null)
         {
             _playerInventoryController.OnCurrentWeaponChanged += HandleCurrentWeaponChangings;
+            _playerInventoryController.OnHandsEmpty += HandleOnHadsEmpty;
         }
     }
 
@@ -98,6 +101,7 @@ public class PlayerView : MonoBehaviour
         if (_playerInventoryController is not null)
         {
             _playerInventoryController.OnCurrentWeaponChanged -= HandleCurrentWeaponChangings;
+            _playerInventoryController.OnHandsEmpty -= HandleOnHadsEmpty;
         }
 
         _overrideControllersByWeaoponType.Clear();
@@ -144,11 +148,16 @@ public class PlayerView : MonoBehaviour
         _animator.SetBool(PlayerAnimationsConsts.GroundStateKey, newStateValue);
     }
 
-    private void HandleCurrentWeaponChangings(WeaponType weaponType) 
+    private void HandleCurrentWeaponChangings(Weapon weapone) 
     {
-        AnimatorOverrideController overrideControllerForWeaponType = _overrideControllersByWeaoponType.GetValue(weaponType);
+        AnimatorOverrideController overrideControllerForWeaponType = _overrideControllersByWeaoponType.GetValue(weapone.WeaponType);
 
         _animator.runtimeAnimatorController = overrideControllerForWeaponType;
         _animator.TrySetLayerWeight(PlayerAnimationsConsts.HandsLayerName, 1f);
+    }
+
+    private void HandleOnHadsEmpty()
+    {
+        _animator.TrySetLayerWeight(PlayerAnimationsConsts.HandsLayerName, 0f);
     }
 }

@@ -5,7 +5,8 @@ using Zenject;
 
 public class PlayerInventoryController : InventoryController
 {
-    public event Action<WeaponType> OnCurrentWeaponChanged;
+    public event Action<Weapon> OnCurrentWeaponChanged;
+    public event Action OnHandsEmpty;
 
     private MainInput _input;
 
@@ -38,7 +39,7 @@ public class PlayerInventoryController : InventoryController
             _input.Inventory.LightWeapon.performed -= SwapOnLightWeapon;
             _input.Inventory.CommonWeapon.performed -= SwapOnCommonWeapon;
             _input.Inventory.HeavyWeapon.performed -= SwapOnHeavyWeapon;
-            _input.Inventory.Grenade.performed += SwapOnGreande;
+            _input.Inventory.Grenade.performed -= SwapOnGreande;
         }
     }
 
@@ -64,11 +65,38 @@ public class PlayerInventoryController : InventoryController
 
     private void SwapCyurrentWeapon(WeaponType weaponType)
     {
-        GameObject weapon = _inventoryModel.GetWeaponByType(weaponType);
+        Weapon weaponPrefab = _inventoryModel.GetWeaponByType(weaponType);
+
+        if (_currentWeapon?.WeaponType == weaponType)
+        {
+            OnHandsEmpty?.Invoke();
+
+            Destroy(_currentWeapon.gameObject);
+
+            _currentWeapon = null;
+
+            return;
+        }
+
+        if (_currentWeapon is not null)
+        {
+            Destroy(_currentWeapon.gameObject);
+
+            _currentWeapon = null;
+        }
+
+        Weapon weapon = CreateWeapon(weaponPrefab.gameObject);
 
         _currentWeapon = weapon;
-        OnCurrentWeaponChanged?.Invoke(weaponType);
+        OnCurrentWeaponChanged?.Invoke(weapon);
 
         Debug.Log($"current weapon is: {weapon}, of type: {weaponType}");
+    }
+
+    private Weapon CreateWeapon(GameObject weaponPrefab)
+    {
+        GameObject weapon = Instantiate(weaponPrefab);
+
+        return weapon.GetComponent<Weapon>();
     }
 }
