@@ -7,8 +7,8 @@ public class PlayerRigView : MonoBehaviour
     [SerializeField] private Transform _aimingWeaponPoint;
     [SerializeField] private Transform _rightHandTarget;
     [SerializeField] private Transform _leftHandTarget;
-    [SerializeField] private Transform _ikRightHandPosition;
-    [SerializeField] private Transform _ikLeftHandPosition;
+    [SerializeField] private Transform _ikRightHandPoint;
+    [SerializeField] private Transform _ikLeftHandPoint;
     private Transform _currentWeaonPoint;
 
     [SerializeField] private TwoBoneIKConstraint _rightHandIK;
@@ -53,8 +53,10 @@ public class PlayerRigView : MonoBehaviour
             _currentWeapon.transform.position = _currentWeaonPoint.position;
             _currentWeapon.transform.rotation = _currentWeaonPoint.rotation;
 
-            _leftHandTarget.position = _ikLeftHandPosition.position;
-            _rightHandTarget.position = _ikRightHandPosition.position;
+            _leftHandTarget.position = _ikLeftHandPoint.position;
+            _leftHandTarget.rotation = _ikLeftHandPoint.rotation;
+            _rightHandTarget.position = _ikRightHandPoint.position;
+            _rightHandTarget.rotation = _ikRightHandPoint.rotation;
         }
     }
 
@@ -80,8 +82,8 @@ public class PlayerRigView : MonoBehaviour
     private void HandleOnHandsEmpty() 
     {
         _currentWeapon = null;
-        _ikRightHandPosition = null;
-        _ikLeftHandPosition = null;
+        _ikRightHandPoint = null;
+        _ikLeftHandPoint = null;
 
         _rightHandIK.weight = 0f;
         _leftHandIK.weight = 0f;
@@ -101,8 +103,8 @@ public class PlayerRigView : MonoBehaviour
             _rightHandIK.weight = 1f;
             _leftHandIK.weight = handlingType == WeaponHandlingType.OneHanded ? 0f : 1f;
 
-            _ikLeftHandPosition = weaponHadlingData.RightHandPoint;
-            _ikRightHandPosition = weaponHadlingData.LeftHandPoint;  
+            _ikLeftHandPoint = weaponHadlingData.RightHandPoint;
+            _ikRightHandPoint = weaponHadlingData.LeftHandPoint;  
         }
     }
 }

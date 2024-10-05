@@ -229,8 +229,8 @@ MonoBehaviour:
   _aimingWeaponPoint: {fileID: 2526368846306557836}
   _rightHandTarget: {fileID: 7038228391815321414}
   _leftHandTarget: {fileID: 6667461172289407493}
-  _ikRightHandPosition: {fileID: 0}
-  _ikLeftHandPosition: {fileID: 0}
+  _ikRightHandPoint: {fileID: 0}
+  _ikLeftHandPoint: {fileID: 0}
   _rightHandIK: {fileID: 9199017602346249646}
   _leftHandIK: {fileID: 2867716294029492739}
 --- !u!114 &9005730006350801724
@@ -612,7 +612,7 @@ Transform:
   m_GameObject: {fileID: 6021915844488677981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.976, z: 0.301}
+  m_LocalPosition: {x: 0, y: 1.074, z: 0.389}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
